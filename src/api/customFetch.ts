@@ -34,6 +34,7 @@ export function customFetch({
       method,
       body,
       headers: {
+        'content-type': 'application/json',
         ...headers,
       },
     };

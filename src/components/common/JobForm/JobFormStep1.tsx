@@ -5,14 +5,20 @@ import AppInput from "../AppInput/AppInput";
 
 interface Props {
   value: any;
-  onChane(): void;
+  onChange(key: string, value: string): void;
+  onSubmit(): void;
 }
 
-export default function JobFormStep1(props: Props) {
+export default function JobFormStep1({ value, onChange, onSubmit }: Props) {
+  function submitForm(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    onSubmit();
+  }
+
   return (
     <form
-      onSubmit={(event) => event.preventDefault()}
-      className="w-[577px] rounded-[10px] bg-white p-8"
+      onSubmit={submitForm}
+      className="max-h-screen w-[577px] overflow-auto rounded-[10px] bg-white p-8"
     >
       <div className="flex justify-between">
         <h2 className="text-xl">Create a job</h2>
@@ -27,7 +33,12 @@ export default function JobFormStep1(props: Props) {
             className="align-super text-[8px] text-[#D86161]"
           />
         </span>
-        <AppInput required placeholder="ex. UX UI Designer" />
+        <AppInput
+          required
+          placeholder="ex. UX UI Designer"
+          value={value.jobTitle || ''}
+          onChange={(event) => onChange("jobTitle", event.target.value)}
+        />
       </label>
 
       <label className="mt-6 block text-sm">
@@ -38,7 +49,12 @@ export default function JobFormStep1(props: Props) {
             className="align-super text-[8px] text-[#D86161]"
           />
         </span>
-        <AppInput required placeholder="ex. Google" />
+        <AppInput
+          required
+          placeholder="ex. Google"
+          value={value.companyName || ''}
+          onChange={(event) => onChange("companyName", event.target.value)}
+        />
       </label>
 
       <label className="mt-6 block text-sm">
@@ -49,17 +65,32 @@ export default function JobFormStep1(props: Props) {
             className="align-super text-[8px] text-[#D86161]"
           />
         </span>
-        <AppInput required placeholder="ex. Information Technology" />
+        <AppInput
+          required
+          placeholder="ex. Information Technology"
+          value={value.industry || ''}
+          onChange={(event) => onChange("industry", event.target.value)}
+        />
       </label>
 
       <div className="mb-24 mt-6 flex gap-6">
         <label className="flex-1 text-sm">
           <span className="mb-1 block font-medium">Location</span>
-          <AppInput required placeholder="ex. Chennai" />
+          <AppInput
+            required
+            placeholder="ex. Chennai"
+            value={value.location || ''}
+            onChange={(event) => onChange("location", event.target.value)}
+          />
         </label>
         <label className="flex-1 text-sm">
           <span className="mb-1 block font-medium">Remote type</span>
-          <AppInput required placeholder="ex. In-office" />
+          <AppInput
+            required
+            placeholder="ex. In-office"
+            value={value.remoteType || ''}
+            onChange={(event) => onChange("remoteType", event.target.value)}
+          />
         </label>
       </div>
 
