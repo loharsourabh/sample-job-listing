@@ -21,7 +21,7 @@ export default function LandingPage() {
     staleTime: 5 * 60 * 1000,
   });
 
-  const { mutate: deleteJob } = useMutation({
+  const { mutate: deleteJob, isPending: isDeletingJob } = useMutation({
     mutationFn: (jobID: string) => DeleteJob(jobID)(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobList"] });
@@ -88,7 +88,7 @@ export default function LandingPage() {
 
       {deleteDialogId && (
         <ConfirmationDialog
-          onConfirm={() => deleteJob(deleteDialogId)}
+          onConfirm={() => !isDeletingJob && deleteJob(deleteDialogId)}
           onClose={() => setDeleteDialogId(null)}
         />
       )}

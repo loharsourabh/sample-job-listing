@@ -14,7 +14,7 @@ export default function JobForm({ jobToBeEdited, onClose }: Props) {
   const [formStep, setFormStep] = useState(1);
   const [jobDetails, setJobDetails] = useState(jobToBeEdited || {});
 
-  const { mutate: createNewJob } = useMutation({
+  const { mutate: createNewJob, isPending: isCreatingNewJob } = useMutation({
     mutationFn: (data: any) => CreateJob(data)(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobList"] });
@@ -22,7 +22,7 @@ export default function JobForm({ jobToBeEdited, onClose }: Props) {
     },
   });
 
-  const { mutate: updateJob } = useMutation({
+  const { mutate: updateJob, isPending: isUpdatingJob } = useMutation({
     mutationFn: (data: any) => UpdateJob(data.jobId, data.body)(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobList"] });
@@ -37,6 +37,10 @@ export default function JobForm({ jobToBeEdited, onClose }: Props) {
   }
 
   function submitInputValues() {
+    if (isCreatingNewJob || isUpdatingJob) {
+      return;
+    }
+
     if (jobToBeEdited) {
       updateJob({
         jobId: jobToBeEdited.id,
