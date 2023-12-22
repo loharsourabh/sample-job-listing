@@ -19,21 +19,16 @@ export default function JobFormStep2({ value, onChange, onSubmit }: Props) {
   ) {
     const { value, min, max } = event.target;
 
-    if ((Number(value) >= Number(min) && Number(value) <= Number(max)) || value === '') {
+    if (
+      (Number(value) >= Number(min) && Number(value) <= Number(max)) ||
+      value === ""
+    ) {
       onChange(key, value);
     }
   }
 
   return (
-    <form
-      onSubmit={submitForm}
-      className="max-h-screen w-[577px] overflow-auto rounded-[10px] bg-white p-8"
-    >
-      <div className="flex justify-between">
-        <h2 className="text-xl">Create a job</h2>
-        <div className="font-medium">Step 2</div>
-      </div>
-
+    <form onSubmit={submitForm}>
       <div className="mt-6 flex gap-6">
         <label className="flex-1 text-sm">
           <span className="mb-1 block font-medium">Experience</span>

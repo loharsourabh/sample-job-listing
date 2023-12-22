@@ -56,23 +56,31 @@ export default function JobForm({ jobToBeEdited, onClose }: Props) {
       onClick={closeForm}
       className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-20 backdrop-blur"
     >
-      {formStep === 1 ? (
-        <JobFormStep1
-          value={jobDetails}
-          onChange={(key, value) =>
-            setJobDetails((prev) => ({ ...prev, [key]: value }))
-          }
-          onSubmit={() => setFormStep(2)}
-        />
-      ) : (
-        <JobFormStep2
-          value={jobDetails}
-          onChange={(key, value) =>
-            setJobDetails((prev) => ({ ...prev, [key]: value }))
-          }
-          onSubmit={submitInputValues}
-        />
-      )}
+      <div className="max-h-screen w-[577px] overflow-auto rounded-[10px] bg-white p-8">
+        <div className="flex justify-between">
+          <h2 className="text-xl">
+            {jobToBeEdited ? "Update" : "Create a"} job
+          </h2>
+          <div className="font-medium">Step {formStep}</div>
+        </div>
+        {formStep === 1 ? (
+          <JobFormStep1
+            value={jobDetails}
+            onChange={(key, value) =>
+              setJobDetails((prev) => ({ ...prev, [key]: value }))
+            }
+            onSubmit={() => setFormStep(2)}
+          />
+        ) : (
+          <JobFormStep2
+            value={jobDetails}
+            onChange={(key, value) =>
+              setJobDetails((prev) => ({ ...prev, [key]: value }))
+            }
+            onSubmit={submitInputValues}
+          />
+        )}
+      </div>
     </div>
   );
 }

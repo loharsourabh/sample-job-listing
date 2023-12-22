@@ -16,15 +16,7 @@ export default function JobFormStep1({ value, onChange, onSubmit }: Props) {
   }
 
   return (
-    <form
-      onSubmit={submitForm}
-      className="max-h-screen w-[577px] overflow-auto rounded-[10px] bg-white p-8"
-    >
-      <div className="flex justify-between">
-        <h2 className="text-xl">Create a job</h2>
-        <div className="font-medium">Step 1</div>
-      </div>
-
+    <form onSubmit={submitForm}>
       <label className="mt-6 block text-sm">
         <span className="mb-1 block font-medium">
           Job title
@@ -36,7 +28,7 @@ export default function JobFormStep1({ value, onChange, onSubmit }: Props) {
         <AppInput
           required
           placeholder="ex. UX UI Designer"
-          value={value.jobTitle || ''}
+          value={value.jobTitle || ""}
           onChange={(event) => onChange("jobTitle", event.target.value)}
         />
       </label>
@@ -52,7 +44,7 @@ export default function JobFormStep1({ value, onChange, onSubmit }: Props) {
         <AppInput
           required
           placeholder="ex. Google"
-          value={value.companyName || ''}
+          value={value.companyName || ""}
           onChange={(event) => onChange("companyName", event.target.value)}
         />
       </label>
@@ -68,7 +60,7 @@ export default function JobFormStep1({ value, onChange, onSubmit }: Props) {
         <AppInput
           required
           placeholder="ex. Information Technology"
-          value={value.industry || ''}
+          value={value.industry || ""}
           onChange={(event) => onChange("industry", event.target.value)}
         />
       </label>
@@ -79,7 +71,7 @@ export default function JobFormStep1({ value, onChange, onSubmit }: Props) {
           <AppInput
             required
             placeholder="ex. Chennai"
-            value={value.location || ''}
+            value={value.location || ""}
             onChange={(event) => onChange("location", event.target.value)}
           />
         </label>
@@ -88,7 +80,7 @@ export default function JobFormStep1({ value, onChange, onSubmit }: Props) {
           <AppInput
             required
             placeholder="ex. In-office"
-            value={value.remoteType || ''}
+            value={value.remoteType || ""}
             onChange={(event) => onChange("remoteType", event.target.value)}
           />
         </label>
